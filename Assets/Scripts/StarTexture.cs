@@ -6,6 +6,9 @@ public class StarTexture : MonoBehaviour
   public float scale = 100f;
   public float seed = 1337f;
 
+  public GameObject target;
+  public float spaceMovementRatio = 0.0001f;
+  
   public float x;
   public float y;
 
@@ -38,8 +41,8 @@ public class StarTexture : MonoBehaviour
 
   public void Update()
   {
-    x += 0.001f;
-    y += 0.001f;
+    x = target.transform.position.x * spaceMovementRatio;
+    y = target.transform.position.y * spaceMovementRatio;
     material.SetTextureOffset("_MainTex", new Vector2(x, y));
   }
 
