@@ -52,3 +52,6 @@ crashlytics-build.properties
 
 # Editor / IDE specific files
 .vscode
+
+# MacOS X files
+.DS_Store
