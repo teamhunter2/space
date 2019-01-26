@@ -8,7 +8,7 @@ public class StarTexture : MonoBehaviour
 
   public GameObject target;
   public float spaceMovementRatio = 0.0001f;
-  
+
   public float x;
   public float y;
 
@@ -22,7 +22,7 @@ public class StarTexture : MonoBehaviour
   private int width = 0;
   private int height = 0;
 
-  public void Start()
+  public void Awake()
   {
     this.width = Screen.width * 4;
     this.height = Screen.height * 4;
@@ -33,7 +33,9 @@ public class StarTexture : MonoBehaviour
 
     transform.localScale = new Vector3(width / 10f, 1.0f, height / 10f);
 
-    material = GetComponent<Renderer>().material;
+    Renderer r = GetComponent<Renderer>();
+    material = new Material(Shader.Find("Unlit/Transparent"));
+    r.material = material;
     buffer = new Color[this.width * this.height];
 
     material.mainTexture = GenerateTexture();
@@ -41,8 +43,11 @@ public class StarTexture : MonoBehaviour
 
   public void Update()
   {
-    x = target.transform.position.x * spaceMovementRatio;
-    y = target.transform.position.y * spaceMovementRatio;
+    if (target != null)
+    {
+      x = target.transform.position.x * spaceMovementRatio;
+      y = target.transform.position.y * spaceMovementRatio;
+    }
     material.SetTextureOffset("_MainTex", new Vector2(x, y));
   }
 
@@ -61,7 +66,7 @@ public class StarTexture : MonoBehaviour
         float yCoord = this.y + y / texture.height * scale;
 
         float sample = Mathf.PerlinNoise(xCoord + seed, yCoord + seed);
-        Color color = sample >= density ? Color.white : Color.black;
+        Color color = sample >= density ? Color.white : new Color(0f, 0f, 0f, 0f);
 
         buffer[(int)y * texture.width + (int)x] = color;
         x++;
