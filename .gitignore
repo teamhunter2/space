@@ -58,3 +58,5 @@ crashlytics-build.properties
 .idea
 Assets/Plugins
 Assets/Plugins.meta
+Assets/AutoSave
+Assets/AutoSave.meta
