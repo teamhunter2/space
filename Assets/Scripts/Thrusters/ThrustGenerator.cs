@@ -23,4 +23,8 @@ public class ThrustGenerator : MonoBehaviour
     return _thrust;
   }
 
+  public Vector3 ThrustOrigin() {
+    return this.transform.localPosition;
+  }
+
 }
