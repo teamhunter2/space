@@ -53,12 +53,12 @@ public class SpaceShipMovement : MonoBehaviour
     void Update()
     {
         AdjustThrusterAnimations();
-        ApplyForces();
+        if(this.tag == "Player")
+            ApplyForces();
         Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, wantedZoom + this.originalZoom, Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.Space))
             ShootMissile();
 
-        ApplyForces();
         if(Input.GetKey(RotateLeft))
             //this.transform.Rotate(new Vector3(0, 0, rotAc), Space.Self);
             this.rb.AddTorque(thrust * 4);
@@ -83,6 +83,7 @@ public class SpaceShipMovement : MonoBehaviour
         float weight = 0;
         for(int i = 0; i < children.Count; i++) {
             weight += children[i].mass;
+            children[i].mass = 0;
         }
         this.GetComponent<Rigidbody2D>().mass = weight;
     }
@@ -140,5 +141,13 @@ private void updateZoom() {
         Vector3 v = this.transform.position + ((Vector3)this.rb.velocity.normalized* 0.10f);
         var m = Instantiate(missile, v, this.transform.rotation);
         m.GetComponent<Rigidbody2D>().velocity = this.rb.velocity * 1.2f;
+    }
+
+    public void MoveForwards() {
+        this.rb.AddRelativeForce(new Vector2(0, thrust), ForceMode2D.Impulse);
+    }
+
+    public void MoveBackwards() {
+        this.rb.AddRelativeForce(new Vector2(0, -thrust), ForceMode2D.Impulse);
     }
 }

@@ -12,7 +12,8 @@ public class CameraController : MonoBehaviour
   {
     if (target != null)
     {
-      transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
+      Vector3 v = new Vector3(target.position.x, target.position.y, this.transform.position.z);
+      transform.position = Vector3.SmoothDamp(transform.position, v, ref velocity, smoothTime);
     }
   }
 }

@@ -38,14 +38,17 @@ public class Missile : MonoBehaviour
       }
     }
   }
-  void OnCollisionEnter2D(Collision2D col)
+  void OnCollisionEnter(Collision col)
   {
-    if (col.gameObject.tag == "Player" || col.gameObject.tag == "Projectile")
+    if (col.gameObject.tag == "Player" || col.gameObject.tag == "Projectile") {
+        this.enabled = false;
+      Physics.IgnoreCollision(col.collider, this.GetComponent<Collider>(), true);
       return;
+    }
     this.enabled = false;
     this.rb.velocity = new Vector2(0, 0);
     this.rb.rotation = 0;
-    Destroy(col.otherCollider, 0.1f);
+    Destroy(col.other.GetComponent<Collider>(), 0.1f);
     Destroy(this.gameObject, 1f);
   }
 
