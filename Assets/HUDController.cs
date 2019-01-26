@@ -17,7 +17,8 @@ public class HUDController : MonoBehaviour
     float distance = Vector3.Distance(Camera.main.transform.position, transform.position);
     float height = 2.0f * Mathf.Tan(0.5f * Camera.main.fieldOfView * Mathf.Deg2Rad) * distance;
 
-    transform.localScale = new Vector3(height / 5f, height / 5f, 1f);
+    transform.position = new Vector3(transform.position.x, transform.position.y, 5f);
+    transform.localScale = new Vector3(0.4f, 0.4f, 1f);
   }
 
   void Update()

@@ -52,20 +52,22 @@ public class SpaceShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AdjustThrusterAnimations();
-        if(this.tag == "Player")
-            ApplyForces();
-        Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, wantedZoom + this.originalZoom, Time.deltaTime);
-        if(Input.GetKeyDown(KeyCode.Space))
-            ShootMissile();
-
-        if(Input.GetKey(RotateLeft))
-            //this.transform.Rotate(new Vector3(0, 0, rotAc), Space.Self);
-            this.rb.AddTorque(thrust * 4);
-        else if(Input.GetKey(RotateRight))
-            //this.transform.Rotate(new Vector3(0, 0, rotAc * -1), Space.Self);
-            this.rb.AddTorque(-thrust * 4);
         
+        if(this.tag == "Player") {
+            AdjustThrusterAnimations();
+            ApplyForces();
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, wantedZoom + this.originalZoom, Time.deltaTime);
+            if(Input.GetKeyDown(KeyCode.Space))
+                ShootMissile();
+
+            if(Input.GetKey(RotateLeft))
+                //this.transform.Rotate(new Vector3(0, 0, rotAc), Space.Self);
+                this.rb.AddTorque(thrust * 4);
+            else if(Input.GetKey(RotateRight))
+                //this.transform.Rotate(new Vector3(0, 0, rotAc * -1), Space.Self);
+                this.rb.AddTorque(-thrust * 4);
+        }
+    
     }
 
     private void updateThrust() {
@@ -137,7 +139,7 @@ private void updateZoom() {
         thrusters.Add(_thruster);
     }
 
-    private void ShootMissile() {
+    public void ShootMissile() {
         Vector3 v = this.transform.position + ((Vector3)this.rb.velocity.normalized* 0.10f);
         var m = Instantiate(missile, v, this.transform.rotation);
         m.GetComponent<Rigidbody2D>().velocity = this.rb.velocity * 1.2f;

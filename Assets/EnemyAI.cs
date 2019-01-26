@@ -18,13 +18,14 @@ public class EnemyAI : MonoBehaviour
     target = GameManager.instance.player;
     targetController = target.GetComponent<SpaceShipMovement>();
 
+    
+
     rb = GetComponent<Rigidbody2D>();
     targetRb = target.GetComponent<Rigidbody2D>();
-
     if (hud != null)
     {
-      hudInstance = GameObject.Instantiate(hud, GameManager.instance.player);
-      hudInstance.transform.parent = GameManager.instance.player;
+      hudInstance = GameObject.Instantiate(hud, Camera.main.transform);
+      hudInstance.transform.parent = Camera.main.transform;
       hudInstance.GetComponent<HUDController>().target = this.transform;
     }
   }
@@ -45,9 +46,15 @@ public class EnemyAI : MonoBehaviour
     float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 100f);
 
-    if (Time.frameCount % 5 == 0)
+    if(Time.frameCount % 256 == 0) {
+      if(Vector2.Distance(transform.position, target.position) < 10f) {
+        controller.ShootMissile();
+      }
+    }
+    if (Time.frameCount % 15 == 0)
     {
 
+      
       if (Vector2.Distance(transform.position, target.position) > 2f)
       {
         controller.MoveForwards();
