@@ -8,7 +8,7 @@ public class Missile : MonoBehaviour
   public float force = 7f;
   private float inertiaBulder = 0.9f;
   public float fuel = 1f;
-
+  public GameObject explosion;
 
   public GameObject target;
   public GameObject fire;
@@ -34,22 +34,26 @@ public class Missile : MonoBehaviour
       {
         //this.rb.AddTorque(0.25f);
         this.GetComponentInChildren<TrailRenderer>().time = 0.2f;
-        this.fire.active = false;
+        this.enabled = false;
       }
     }
   }
-  void OnCollisionEnter(Collision col)
+  void OnCollisionEnter2D(Collision2D col)
   {
-    if (col.gameObject.tag == "Player" || col.gameObject.tag == "Projectile") {
-        this.enabled = false;
-      Physics.IgnoreCollision(col.collider, this.GetComponent<Collider>(), true);
-      return;
-    }
     this.enabled = false;
     this.rb.velocity = new Vector2(0, 0);
     this.rb.rotation = 0;
-    Destroy(col.other.GetComponent<Collider>(), 0.1f);
-    Destroy(this.gameObject, 1f);
+    if (explosion != null)
+    {
+      GameObject.Instantiate(explosion, transform);
+    }
+    AudioSource[] srces = GetComponents<AudioSource>();
+    for (int i = 0; i < srces.Length; i++)
+    {
+      srces[i].Stop();
+    }
+    GetComponent<SpriteRenderer>().material.color = new Color(0f, 0f, 0f, 0f);
+    Destroy(this, 10f);
   }
 
   void OnTriggerExit2D(Collider2D col)
