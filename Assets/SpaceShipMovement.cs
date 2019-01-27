@@ -59,7 +59,7 @@ public class SpaceShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.DrawLine(this.transform.position, this.transform.position + (Vector3)(this.rb.velocity));
         if(!skipPlayerInput) {
             AdjustIntents();
             ApplyForces();
