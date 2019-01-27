@@ -17,8 +17,8 @@ public class EnemyAI_V2 : MonoBehaviour
   private GameObject target;
   private Rigidbody2D targetRb;
   private Rigidbody2D rb;
-  private GameObject hud;
   public AIState state;
+  public GameObject hud;
 
   private SpaceShipMovement controller;
   public float rotationSpeed = 64f;
@@ -33,16 +33,25 @@ public class EnemyAI_V2 : MonoBehaviour
 
   private int attackCount = 0;
   private Transform temporaryTarget;
-
   private GameObject hudInstance;
+  private AudioSource audioSource;
+
   void Start()
   {
+    audioSource = GetComponent<AudioSource>();
     target = GameObject.FindGameObjectWithTag("Player");
     controller = GetComponent<SpaceShipMovement>();
     targetRb = target.GetComponent<Rigidbody2D>();
     rb = GetComponent<Rigidbody2D>();
     SpawnHUD();
     state = AIState.Seeking;
+
+    if (hud != null)
+    {
+      hudInstance = GameObject.Instantiate(hud, Camera.main.transform);
+      hudInstance.transform.parent = Camera.main.transform;
+      hudInstance.GetComponent<HUDController>().target = this.transform;
+    }
   }
 
   void SpawnHUD()
@@ -105,8 +114,23 @@ public class EnemyAI_V2 : MonoBehaviour
     return Mathf.Abs(Vector2.Distance(transform.position, targetTransform.position));
   }
 
+  void PlaySound()
+  {
+    if (!audioSource.isPlaying)
+    {
+      audioSource.Play();
+    }
+  }
+
+  void StopSound()
+  {
+    audioSource.Stop();
+  }
+
   void Seek()
   {
+    PlaySound();
+    audioSource.pitch = 3;
     RotateTowardsTarget();
     float distance = GetDistanceToTarget();
 
@@ -134,6 +158,8 @@ public class EnemyAI_V2 : MonoBehaviour
 
   void Chase()
   {
+    PlaySound();
+    audioSource.pitch = 2;
     RotateTowardsTarget();
     float distance = GetDistanceToTarget();
 
@@ -162,6 +188,7 @@ public class EnemyAI_V2 : MonoBehaviour
 
   void Attack()
   {
+    StopSound();
     RotateTowardsTarget();
     float distance = GetDistanceToTarget();
     Debug.Log("Attacking");
@@ -177,10 +204,16 @@ public class EnemyAI_V2 : MonoBehaviour
 
     if (controller != null)
     {
-      if (Random.Range(0, 100) > 75)
+      if (Random.Range(0, 100) > 25)
       {
-        controller.ShootMissile();
-        attackCount++;
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * distance, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.up), distance);
+
+        if (hit.collider != null && hit.collider.tag == "Player")
+        {
+          controller.ShootMissile();
+          attackCount++;
+        }
       }
     }
 
@@ -199,12 +232,24 @@ public class EnemyAI_V2 : MonoBehaviour
 
   }
 
+  void OnCollisionEnter2D(Collider2D col)
+  {
+    if (col.gameObject.tag == "Projectile")
+    {
+      this.gameObject.tag = "Attachable";
+      Destroy(this.hudInstance);
+      Destroy(this);
+    }
+  }
+
   void Retreat()
   {
+    PlaySound();
+    audioSource.pitch = 1;
     Debug.Log("Retreating");
     if (temporaryTarget == null)
     {
-      Vector2 position = RandomPointOnUnitCircle(maxChaseDistance);
+      Vector2 position = RandomPointOnUnitCircle(minChaseDistance);
       GameObject temp = new GameObject();
       temp.transform.position = position;
       temporaryTarget = temp.transform;
