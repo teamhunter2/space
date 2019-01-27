@@ -20,10 +20,16 @@ public class AttachSalvage : MonoBehaviour
             var ssm =attachable.GetComponent<SpaceShipMovement>();
             if(ssm)
                 ssm.SetSkipPlayerInput();
+            SetLayer(attachable.transform, this.gameObject.layer);
+            foreach(Transform t in attachable.transform) {
+                SetLayer(t, this.gameObject.layer);
+            }
+            
             //canAttach[0].GetComponent<Rigidbody2D>().simulated = false;
             attachable.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             attachable.AddComponent(this.GetType());
             canAttach.Remove(canAttach[0]);
+
             this.SendMessageUpwards("updateMass");
             this.SendMessageUpwards("updateThrust");
             this.SendMessageUpwards("updateZoom");
@@ -50,6 +56,10 @@ public class AttachSalvage : MonoBehaviour
             canAttach.Add(c.gameObject);
             Debug.Log("In range of " + c.ToString());
         }
+    }
+
+    void SetLayer(Transform t, int layer) {
+        t.gameObject.layer = layer;
     }
     void OnTriggerExit2D(Collider2D c) {
         if(c.tag == "Attachable") {
