@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     target = GameManager.instance.player;
     targetController = target.GetComponent<SpaceShipMovement>();
 
-    
+
 
     rb = GetComponent<Rigidbody2D>();
     targetRb = target.GetComponent<Rigidbody2D>();
@@ -37,6 +37,13 @@ public class EnemyAI : MonoBehaviour
     }
   }
 
+  private int getMovementRatio(float distance)
+  {
+    distance = distance > 10 ? 10 : distance;
+    distance = distance < 0 ? 0 : distance;
+    return (int)(distance - 0) * (1 - 32) / (1000 - 0) + 32;
+  }
+
   void Update()
   {
     Vector3 diff = target.position - transform.position;
@@ -44,29 +51,39 @@ public class EnemyAI : MonoBehaviour
 
     float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 100f);
-    if(this.rb.rotation > 0.5f) {
+    if (this.rb.rotation > 0.5f)
+    {
       controller.AddIntent(ShipMovement.RotateLeft);
-      controller.RemoveIntent(ShipMovement.RotateRight); 
-    } else if (this.rb.rotation < 0.5f) {
+      controller.RemoveIntent(ShipMovement.RotateRight);
+    }
+    else if (this.rb.rotation < 0.5f)
+    {
       controller.AddIntent(ShipMovement.RotateRight);
-      controller.RemoveIntent(ShipMovement.RotateLeft); 
+      controller.RemoveIntent(ShipMovement.RotateLeft);
     }
 
-    if(Time.frameCount % 256 == 0) {
-      if(Vector2.Distance(transform.position, target.position) < 10f) {
-        controller.ShootMissile();
+    float distance = Vector2.Distance(transform.position, target.position);
+
+
+    if (Time.frameCount % 32 == 0)
+    {
+      if (distance < 10f)
+      {
+        if (Random.Range(0, 100) > 75)
+        {
+          controller.ShootMissile();
+        }
       }
     }
-    if (Time.frameCount % 15 == 0)
-    {
 
-      
-      if (Vector2.Distance(transform.position, target.position) > 2f)
+    if (Time.frameCount % getMovementRatio(distance) == 0)
+    {
+      if (distance > 5f)
       {
         controller.MoveForwards();
       }
 
-      if (Vector2.Distance(transform.position, target.position) < 2f)
+      if (Vector2.Distance(transform.position, target.position) < 5f)
       {
         controller.MoveBackwards();
       }
