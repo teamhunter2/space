@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour
   public GameObject hud;
 
   private GameObject hudInstance;
-
   void Start()
   {
     target = GameManager.instance.player;
@@ -45,6 +44,13 @@ public class EnemyAI : MonoBehaviour
 
     float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 100f);
+    if(this.rb.rotation > 0.5f) {
+      controller.AddIntent(ShipMovement.RotateLeft);
+      controller.RemoveIntent(ShipMovement.RotateRight); 
+    } else if (this.rb.rotation < 0.5f) {
+      controller.AddIntent(ShipMovement.RotateRight);
+      controller.RemoveIntent(ShipMovement.RotateLeft); 
+    }
 
     if(Time.frameCount % 256 == 0) {
       if(Vector2.Distance(transform.position, target.position) < 10f) {

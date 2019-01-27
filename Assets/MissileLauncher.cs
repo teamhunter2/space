@@ -7,15 +7,24 @@ public class MissileLauncher : MonoBehaviour
   public GameObject missile;
   public int ammo = 10;
 
-  // Update is called once per frame
-  void Update()
-  {
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-      if (ammo > 0)
-      {
-        GameObject current = GameObject.Instantiate(missile);
-      }
+  public float refireTime = 1f;
+  private float currentRefireTime = 0f;
+
+  void Update() {
+    if(currentRefireTime > 0) {
+      currentRefireTime -= Time.deltaTime;
     }
+  }
+  public bool Shoot(Rigidbody2D rb) {
+    if(currentRefireTime > 0f || this.ammo == 0) {
+      return false;
+    }
+    Debug.Log("Shooting" + this);
+    Vector3 v = this.transform.position + ((Vector3)rb.velocity.normalized* 0.10f);
+    this.ammo -= 1;
+    var m = Instantiate(missile, v, this.transform.rotation);
+    m.GetComponent<Rigidbody2D>().velocity = rb.velocity;
+    this.currentRefireTime = refireTime;
+    return true;
   }
 }

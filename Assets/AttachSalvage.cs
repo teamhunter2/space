@@ -24,6 +24,7 @@ public class AttachSalvage : MonoBehaviour
             this.SendMessageUpwards("updateMass");
             this.SendMessageUpwards("updateThrust");
             this.SendMessageUpwards("updateZoom");
+            this.SendMessageUpwards("updateLaunchers");
 
             List<Animation>thrusters = new List<Animation>();
             this.GetComponentsInChildren<Animation>(true, thrusters);

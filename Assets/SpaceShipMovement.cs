@@ -35,7 +35,8 @@ public class SpaceShipMovement : MonoBehaviour
     private float wantedZoom;
 
     public List<Animation> thrusters;
-
+    public List<MissileLauncher> Launchers;
+    private List<ShipMovement> intents = new List<ShipMovement>();
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody2D>();
@@ -43,8 +44,10 @@ public class SpaceShipMovement : MonoBehaviour
         this.updateMass();
         this.updateThrust();
         this.updateZoom();
+        this.updateLaunchers();
         this.originalZoom = Camera.main.orthographicSize;
-        this.AdjustThrusterAnimations();
+        if(this.gameObject.tag == "Player")
+            this.AdjustIntents();
 
         this.GetComponentsInChildren<Animation>(false, thrusters);
   }
@@ -54,7 +57,7 @@ public class SpaceShipMovement : MonoBehaviour
     {
         
         if(this.tag == "Player") {
-            AdjustThrusterAnimations();
+            AdjustIntents();
             ApplyForces();
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, wantedZoom + this.originalZoom, Time.deltaTime);
             if(Input.GetKeyDown(KeyCode.Space))
@@ -107,49 +110,97 @@ private void updateZoom() {
             this.rb.AddRelativeForce(new Vector2((thrust/2)*-1, 0), ForceMode2D.Impulse);
         }
     }
-    private void AdjustThrusterAnimations() {
+    private void AdjustIntents() {
         if(Input.GetKeyDown(Forward) || Input.GetKeyUp(Forward)) {
-            SendToThrusters(ShipMovement.Forward, Input.GetKey(Forward));
+            if(Input.GetKey(Forward)) {
+                AddIntent(ShipMovement.Forward);
+            } else {
+                RemoveIntent(ShipMovement.Forward);
+            }
         }
         if(Input.GetKeyDown(Backward) || Input.GetKeyUp(Backward)) {
-            SendToThrusters(ShipMovement.Backward, Input.GetKey(Backward));
+            if(Input.GetKey(Backward)) {
+                AddIntent(ShipMovement.Backward);
+            } else {
+                RemoveIntent(ShipMovement.Backward);
+            }
         }
         if(Input.GetKeyDown(Left) || Input.GetKeyUp(Left)) {
-            SendToThrusters(ShipMovement.Left, Input.GetKey(Left));
+            if(Input.GetKey(Left)) {
+                AddIntent(ShipMovement.Left);
+            } else {
+                RemoveIntent(ShipMovement.Left);
+            }
         }
         if(Input.GetKeyDown(Right) || Input.GetKeyUp(Right)) {
-            SendToThrusters(ShipMovement.Right, Input.GetKey(Right));
+            if(Input.GetKey(Right)) {
+                AddIntent(ShipMovement.Right);
+            } else {
+                RemoveIntent(ShipMovement.Right);
+            }
         }
         if(Input.GetKeyDown(RotateLeft) || Input.GetKeyUp(RotateLeft)) {
-            SendToThrusters(ShipMovement.RotateLeft, Input.GetKey(RotateLeft));
+            if(Input.GetKey(RotateLeft)) {
+                AddIntent(ShipMovement.RotateLeft);
+            } else {
+                RemoveIntent(ShipMovement.RotateLeft);
+            }
         }
         if(Input.GetKeyDown(RotateRight) || Input.GetKeyUp(RotateRight)) {
-            SendToThrusters(ShipMovement.RotateRight, Input.GetKey(RotateRight));
+            if(Input.GetKey(RotateRight)) {
+                AddIntent(ShipMovement.RotateRight);
+            } else {
+                RemoveIntent(ShipMovement.RotateRight);
+            }
         }
+    }
+    private void updateLaunchers() {
+        this.GetComponentsInChildren<MissileLauncher>(true, this.Launchers);
     }
 
     private void SendToThrusters(ShipMovement s, bool status) {
-        foreach(Animation a in thrusters) {
-            a.UpdateThrusterStatus(s, status);
+        if(thrusters != null) {
+            foreach(Animation a in thrusters) {
+                a.UpdateThrusterStatus(s, status);
+            }
         }
     }
-      private void AddToThrusters(object o) {
+    private void AddToThrusters(object o) {
         Debug.Log(o);
         Animation _thruster = (Animation)o;
         thrusters.Add(_thruster);
     }
 
     public void ShootMissile() {
-        Vector3 v = this.transform.position + ((Vector3)this.rb.velocity.normalized* 0.10f);
-        var m = Instantiate(missile, v, this.transform.rotation);
-        m.GetComponent<Rigidbody2D>().velocity = this.rb.velocity * 1.2f;
+        foreach(MissileLauncher m in Launchers) {
+            if(m.Shoot(this.rb)) {
+                break;
+            }
+        }
     }
 
+    public void AddIntent(ShipMovement s) {
+        if(!intents.Contains(s))
+        {
+            intents.Add(s);
+            SendToThrusters(s, true);
+        }
+    }
+    public void RemoveIntent(ShipMovement s) {
+        if(intents.Contains(s)) {
+            intents.Remove(s);
+            SendToThrusters(s, false);
+        }
+    }
     public void MoveForwards() {
+        this.RemoveIntent(ShipMovement.Backward);
+        this.AddIntent(ShipMovement.Forward);
         this.rb.AddRelativeForce(new Vector2(0, thrust), ForceMode2D.Impulse);
     }
 
     public void MoveBackwards() {
+        this.RemoveIntent(ShipMovement.Forward);
+        this.AddIntent(ShipMovement.Backward);
         this.rb.AddRelativeForce(new Vector2(0, -thrust), ForceMode2D.Impulse);
     }
 }
