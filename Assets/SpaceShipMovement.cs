@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
@@ -23,6 +23,7 @@ public class SpaceShipMovement : MonoBehaviour
     public KeyCode Right = KeyCode.D;
     public KeyCode RotateLeft = KeyCode.Q;
     public KeyCode RotateRight = KeyCode.E;
+  private AudioSource audioSource;
 
     private Rigidbody2D rb;
     public float rotAc = 2f;
@@ -74,6 +75,11 @@ public class SpaceShipMovement : MonoBehaviour
                 this.rb.AddTorque(-thrust * 4);
         }
     
+    if (this.intents.Count > 0)
+    {
+      if (!this.audioSource.isPlaying)
+      {
+        this.audioSource.Play();
     }
 
     private void updateThrust() {

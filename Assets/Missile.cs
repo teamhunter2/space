@@ -14,12 +14,16 @@ public class Missile : MonoBehaviour
   public GameObject fire;
   private CapsuleCollider2D boxCollider;
   private Vector2 boxColliderOrg;
+  private bool isInvisible = false;
+  private Transform player;
   // Start is called before the first frame update
   void Start()
   {
     rb = this.GetComponent<Rigidbody2D>();
     boxCollider = this.GetComponent<CapsuleCollider2D>();
     boxCollider.enabled = false;
+
+    player = GameObject.FindGameObjectWithTag("Player").transform;
   }
 
   // Update is called once per frame
@@ -35,9 +39,15 @@ public class Missile : MonoBehaviour
         //this.rb.AddTorque(0.25f);
         this.GetComponentInChildren<TrailRenderer>().time = 0.2f;
         this.enabled = false;
+        if (Vector2.Distance(this.transform.position, player.transform.position) > 100f)
+        {
+          Debug.Log("Missile Destroyed");
+          Destroy(this.gameObject, 1f);
+        }
       }
     }
   }
+
   void OnCollisionEnter2D(Collision2D col)
   {
     this.enabled = false;
@@ -53,7 +63,14 @@ public class Missile : MonoBehaviour
       srces[i].Stop();
     }
     GetComponent<SpriteRenderer>().material.color = new Color(0f, 0f, 0f, 0f);
+
+    /* Destroy(col.otherCollider.gameObject); */
     Destroy(this, 10f);
+  }
+
+  void OnBecameInvisible()
+  {
+    this.isInvisible = true;
   }
 
   void OnTriggerExit2D(Collider2D col)
@@ -62,9 +79,5 @@ public class Missile : MonoBehaviour
     {
       this.boxCollider.enabled = true;
     }
-  }
-  void OnBecameInvisible()
-  {
-    Destroy(this.gameObject, 1f);
   }
 }
