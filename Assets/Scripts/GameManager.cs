@@ -30,9 +30,17 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKeyUp(KeyCode.Return))
+    /* if (Input.GetKeyUp(KeyCode.Return))
     {
       SpawnRandomEnemy();
+    } */
+
+    if (Time.frameCount % 150 == 0)
+    {
+      if (Random.Range(0, 100) > 75)
+      {
+        SpawnRandomEnemy();
+      }
     }
   }
 
