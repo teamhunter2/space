@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
   public GameObject hud;
 
   private GameObject hudInstance;
+  private bool isDead = false;
   void Start()
   {
     target = GameManager.instance.player;
@@ -46,6 +47,8 @@ public class EnemyAI : MonoBehaviour
 
   void Update()
   {
+    if(isDead)
+      return;
     Vector3 diff = target.position - transform.position;
     diff.Normalize();
 
@@ -87,6 +90,19 @@ public class EnemyAI : MonoBehaviour
       {
         controller.MoveBackwards();
       }
+    }
+  }
+
+  void OnTriggerEnter2D(Collider2D col) {
+    if(col.tag == "Projectile") {
+      this.gameObject.tag = "Attachable";
+      Destroy(this);
+      Destroy(this.GetComponent<HUDController>());
+      foreach(ShipMovement s in (ShipMovement[])System.Enum.GetValues(typeof(ShipMovement)))
+      {
+        controller.RemoveIntent(s);
+      }
+      
     }
   }
 }
