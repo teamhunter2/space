@@ -31,6 +31,13 @@ public class Missile : MonoBehaviour
   {
     if (this.fuel > 0)
     {
+      if(this.target) {
+        Debug.DrawLine(this.transform.position, this.target.transform.position + (Vector3)this.target.GetComponent<Rigidbody2D>().velocity);
+        Vector3 diff = (target.transform.position + (Vector3)this.target.GetComponent<Rigidbody2D>().velocity) - transform.position;
+        diff.Normalize();
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 200f);
+      }
       this.fuel -= Time.deltaTime;
       this.rb.AddRelativeForce(new Vector2(0, (1f * force * (1f - inertiaBulder))));
       this.inertiaBulder *= 0.5f;

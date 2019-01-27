@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour
     diff.Normalize();
 
     float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 100f);
+    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * 1f);
     if (this.rb.rotation > 0.5f)
     {
       controller.AddIntent(ShipMovement.RotateLeft);

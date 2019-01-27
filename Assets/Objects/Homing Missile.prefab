@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dc2aa7745594c8e8cc08a9ac63665a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 7
-  fuel: 1
+  force: 3
+  fuel: 10
   explosion: {fileID: 355940768135187220, guid: cb852e782028b4aa194424670a69d92d,
     type: 3}
   target: {fileID: 0}

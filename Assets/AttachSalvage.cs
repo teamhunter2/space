@@ -25,7 +25,6 @@ public class AttachSalvage : MonoBehaviour
                 SetLayer(t, this.gameObject.layer);
             }
             
-            //canAttach[0].GetComponent<Rigidbody2D>().simulated = false;
             attachable.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             attachable.AddComponent(this.GetType());
             canAttach.Remove(canAttach[0]);
