@@ -23,6 +23,7 @@ public class MissileLauncher : MonoBehaviour
     Vector3 v = this.transform.position + ((Vector3)rb.velocity.normalized* 0.10f);
     this.ammo -= 1;
     var m = Instantiate(missile, v, this.transform.rotation);
+    m.layer = this.gameObject.layer;
     m.GetComponent<Rigidbody2D>().velocity = rb.velocity;
     this.currentRefireTime = refireTime;
     return true;
