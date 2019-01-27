@@ -17,6 +17,9 @@ public class AttachSalvage : MonoBehaviour
             GameObject attachable = canAttach[0];
             attachable.tag = "Player";
             attachable.transform.parent = this.gameObject.transform;
+            var ssm =attachable.GetComponent<SpaceShipMovement>();
+            if(ssm)
+                ssm.SetSkipPlayerInput();
             //canAttach[0].GetComponent<Rigidbody2D>().simulated = false;
             attachable.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             attachable.AddComponent(this.GetType());

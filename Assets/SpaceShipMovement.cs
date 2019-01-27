@@ -37,6 +37,7 @@ public class SpaceShipMovement : MonoBehaviour
     public List<Animation> thrusters;
     public List<MissileLauncher> Launchers;
     private List<ShipMovement> intents = new List<ShipMovement>();
+    private bool skipPlayerInput = false;
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody2D>();
@@ -48,6 +49,8 @@ public class SpaceShipMovement : MonoBehaviour
         this.originalZoom = Camera.main.orthographicSize;
         if(this.gameObject.tag == "Player")
             this.AdjustIntents();
+        else
+            this.skipPlayerInput = true;
 
         this.GetComponentsInChildren<Animation>(false, thrusters);
   }
@@ -56,7 +59,7 @@ public class SpaceShipMovement : MonoBehaviour
     void Update()
     {
         
-        if(this.tag == "Player") {
+        if(!skipPlayerInput) {
             AdjustIntents();
             ApplyForces();
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, wantedZoom + this.originalZoom, Time.deltaTime);
@@ -202,5 +205,8 @@ private void updateZoom() {
         this.RemoveIntent(ShipMovement.Forward);
         this.AddIntent(ShipMovement.Backward);
         this.rb.AddRelativeForce(new Vector2(0, -thrust), ForceMode2D.Impulse);
+    }
+    public void SetSkipPlayerInput() {
+        this.skipPlayerInput = true;
     }
 }
