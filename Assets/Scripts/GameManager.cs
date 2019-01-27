@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKey(KeyCode.Return))
+    if (Input.GetKeyUp(KeyCode.Return))
     {
       SpawnRandomEnemy();
     }
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
   public void SpawnRandomEnemy()
   {
     GameObject enemeny = enemies[(int)Random.Range(0, enemies.Count)];
-    GameObject.Instantiate(enemeny, RandomPointOnUnitCircle(100f), enemeny.transform.rotation);
+    GameObject.Instantiate(enemeny, RandomPointOnUnitCircle(10f), enemeny.transform.rotation);
   }
 
   public Transform player
