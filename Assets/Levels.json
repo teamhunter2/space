@@ -1,0 +1,34 @@
+{
+  "pointsOfInterest": [
+    {
+      "id": 1,
+      "name": "Starting point",
+      "paths": [2,3],
+      "mapPosition": {"x": 0, "y": 0}
+    },
+    {
+      "id": 4,
+      "name": "Id 4",
+      "paths": [2],
+      "mapPosition": {"x": 58, "y": 59}
+    },
+    {
+      "id": 5,
+      "name": "Id 5",
+      "paths": [3],
+      "mapPosition": {"x": 103, "y": -15}
+    }
+  ],
+  "paths": [
+    {
+      "id": 2,
+      "name": "The first path",
+      "pointsOfInterest": [1,4]
+    },
+    {
+      "id": 3,
+      "name": "The other path",
+      "pointsOfInterest": [1,5]
+    }
+  ]
+}
