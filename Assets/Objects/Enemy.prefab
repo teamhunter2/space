@@ -92,8 +92,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1f9d422b90e4ae3bda9bce5233ac25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
   - {fileID: 21300002, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e637c1dd2ec43432481f0670c33c5dcf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 0
   BoostButton: 32
   normalThrust: 0.25
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1f9d422b90e4ae3bda9bce5233ac25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
   - {fileID: 21300002, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
@@ -256,8 +256,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e637c1dd2ec43432481f0670c33c5dcf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 0
   BoostButton: 32
   normalThrust: 0.25
@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1f9d422b90e4ae3bda9bce5233ac25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
   - {fileID: 21300002, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
@@ -399,8 +399,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e637c1dd2ec43432481f0670c33c5dcf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 0
   BoostButton: 32
   normalThrust: 0.25
@@ -521,8 +521,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1f9d422b90e4ae3bda9bce5233ac25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
   - {fileID: 21300002, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
@@ -542,8 +542,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e637c1dd2ec43432481f0670c33c5dcf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 0
   BoostButton: 32
   normalThrust: 0.25
@@ -589,14 +589,12 @@ GameObject:
   - component: {fileID: 7458653502056537944}
   - component: {fileID: 7458653502056537945}
   - component: {fileID: 7458653502056537946}
+  - component: {fileID: 5983856882329050542}
   - component: {fileID: 5029281814794897715}
-<<<<<<< HEAD
+  - component: {fileID: 7458653502533562040}
   - component: {fileID: 635424459002166294}
   - component: {fileID: 5214145918599477025}
-  m_Layer: 0
-=======
   m_Layer: 9
->>>>>>> Sikkerhets commit
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -621,6 +619,7 @@ Transform:
   - {fileID: 7458653501315466517}
   - {fileID: 8597096743732173320}
   - {fileID: 6629106803309096403}
+  - {fileID: 7458653502533562041}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -682,8 +681,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f42ae246369d4b40ab9be39784e1078, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Forward: 119
   Backward: 115
   Left: 97
@@ -726,8 +725,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe1f14f56c1104a658797a18b17ffcc8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 1
 --- !u!114 &7458653502056537959
 MonoBehaviour:
@@ -739,8 +738,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299bd9864c090420b83c01b5a94555dc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7458653502056537944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,8 +750,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0005abeb05504c659277a1e7e8e8f5b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   zoomIncrease: 0.2
 --- !u!70 &7458653502056537945
 CapsuleCollider2D:
@@ -777,22 +776,67 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7458653502056537947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a829230129624a00871392b2af20b6b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   controller: {fileID: 7458653502056537956}
   targetController: {fileID: 0}
   rb: {fileID: 0}
   targetRb: {fileID: 0}
   hud: {fileID: 7496059982786003685, guid: c195ed4e193e842d481fb35fca8b03df, type: 3}
---- !u!70 &5029281814794897715
+--- !u!114 &5983856882329050542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458653502056537947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad0d597b8a64e44bc96dc39f414332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   state: 0
-  minSeekDistance: 10
-  maxSeekDistance: 100
-  minChaseDistance: 1
+  rotationSpeed: 64
+  seekSpeed: 10
+  seekMinDistance: 10
+  chaseMinSpeed: 1
+  minChaseDistance: 3
   maxChaseDistance: 10
+--- !u!70 &5029281814794897715
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458653502056537947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!70 &7458653502533562040
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458653502056537947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.36, y: 3.55}
+  m_Direction: 0
 --- !u!82 &635424459002166294
 AudioSource:
   m_ObjectHideFlags: 0
@@ -899,11 +943,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b89527b3da76e4cfc9bfb0d76b4cdddc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   missile: {fileID: 5808837227545940050, guid: 34063f85e5c714baeb3c8d82f2156778, type: 3}
   ammo: 100
   refireTime: 1
+  launchSeeking: 0
+  seekingTag: Enemy
 --- !u!1 &7458653502533562042
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +960,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7458653502533562041}
   - component: {fileID: 7458653502533554503}
-  - component: {fileID: 7458653502533562040}
   m_Layer: 0
   m_Name: SalvageZone
   m_TagString: Player
@@ -934,7 +979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7458653502056537954}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7458653502533554503
 MonoBehaviour:
@@ -946,24 +991,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d00b200ccfde5493a82ea5403ebb640b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
---- !u!70 &7458653502533562040
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7458653502056537947}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.36, y: 3.55}
-  m_Direction: 0
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7458653502646787381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,8 +1085,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1f9d422b90e4ae3bda9bce5233ac25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
   - {fileID: 21300002, guid: d0886f7a848db43b6a9fa88b223ceaf7, type: 3}
@@ -1077,8 +1106,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e637c1dd2ec43432481f0670c33c5dcf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrust: 0
   BoostButton: 32
   normalThrust: 0.25

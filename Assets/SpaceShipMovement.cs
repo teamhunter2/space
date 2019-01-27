@@ -15,7 +15,7 @@ public enum ShipMovement
 }
 public class SpaceShipMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame update    
 
     public KeyCode Forward = KeyCode.W;
     public KeyCode Backward = KeyCode.S;
@@ -75,11 +75,13 @@ public class SpaceShipMovement : MonoBehaviour
                 this.rb.AddTorque(-thrust * 4);
         }
     
-    if (this.intents.Count > 0)
-    {
-      if (!this.audioSource.isPlaying)
-      {
-        this.audioSource.Play();
+        if (this.intents.Count > 0)
+        {
+            if (this.audioSource && !this.audioSource.isPlaying)
+            {
+                this.audioSource.Play();
+            }
+        }
     }
 
     private void updateThrust() {
